@@ -1,0 +1,23 @@
+version: '3.8'
+
+volumes:
+  backend-database-volume:
+
+services:
+  database:
+    image: mcr.microsoft.com/mssql/server
+    container_name: orders_database
+    volumes:
+       - backend-database-volume:/var/opt/mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Powertone123!
+    ports:
+      - "1433:1433"
+  backend:
+    build: .
+    container_name: orders_backend
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
