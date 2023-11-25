@@ -1,7 +1,7 @@
 using Common.Services.Mediatr;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
 using Store.Common.Commands.Orders;
 using Store.Common.Data;
@@ -21,29 +21,27 @@ builder.Services.AddScoped<IMediator, Mediator>();
 builder.Services.ForScoped<GetOrders, Order[]>().AddHandler<GetOrdersHandler>();
 builder.Services.ForScoped<CreateOrder, Order>().AddHandler<CreateOrderHandler>();
 
-builder.Services.AddAuthentication().AddCookie("Store.Identity");
-
-builder.Services.AddAuthorization(options =>
+builder.Services.AddAuthentication(options =>
 {
-    options.DefaultPolicy = new AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .AddAuthenticationSchemes("Store.Identity")
-    .Build();
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+})
+.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+.AddOpenIdConnect(options =>
+{
+    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.Authority = "https://localhost:5001/";
+    options.ClientId = "store.api";
+    options.ClientSecret = "secret";
+    options.ResponseType = "code";
+
+    // options.Scope.Add("openid"); default
+    // options.Scope.Add("profile"); default
+
+    // options.CallbackPath = new PathString("signin-oidc"); default
+
+    options.SaveTokens = true;
 });
-
-//builder.Services.AddAuthentication("Store.").AddIdentityServerAuthentication("Bearer", options =>
-//{
-//    options.ApiName = "store.api";
-//    options.Authority = "https://localhost:7170";
-//});
-
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.DefaultPolicy = new AuthorizationPolicyBuilder()
-//    .RequireAuthenticatedUser()
-//    .AddAuthenticationSchemes("Store.Identity", "Bearer")
-//    .Build();
-//});
 
 var app = builder.Build();
 
@@ -54,6 +52,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();

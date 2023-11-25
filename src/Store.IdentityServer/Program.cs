@@ -1,6 +1,17 @@
+using Store.IdentityServer.Config;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddIdentityServer(options =>
+{
+    options.EmitStaticAudienceClaim = true;
+})
+.AddTestUsers(IdentityConfig.Users)
+.AddInMemoryIdentityResources(IdentityConfig.IdentityResources)
+.AddInMemoryClients(IdentityConfig.Clients)
+.AddDeveloperSigningCredential();
 
 var app = builder.Build();
 
@@ -14,6 +25,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseIdentityServer();
 
 app.UseAuthorization();
 

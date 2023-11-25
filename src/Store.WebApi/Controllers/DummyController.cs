@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Store.WebApi.Controllers
 {
     [ApiController]
-    [Authorize]
     [Route("Dummy")]
+    [Authorize]
     public class DummyController : ControllerBase
     {
         public IActionResult GetDummies()
