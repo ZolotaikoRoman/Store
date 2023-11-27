@@ -1,0 +1,9 @@
+﻿@page
+@model Todos.MVC.Pages.Items.IndexModel
+@{
+}
+
+@foreach (var item in Model.Container.Todos)
+{
+    @await Html.PartialAsync("_TodoItem", item);
+}
