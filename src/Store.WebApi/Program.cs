@@ -35,9 +35,6 @@ builder.Services.AddAuthentication(options =>
     options.ClientSecret = "secret";
     options.ResponseType = "code";
 
-    // options.Scope.Add("openid"); default
-    // options.Scope.Add("profile"); default
-
     // options.CallbackPath = new PathString("signin-oidc"); default
 
     options.SaveTokens = true;

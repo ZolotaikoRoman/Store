@@ -2,20 +2,13 @@ using IdentityServer4;
 using IdentityServer4.Test;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Store.IdentityServer.Config;
 using Store.IdentityServer.Models.Account;
-using System.Reflection;
 
 namespace Store.IdentityServer.Pages.Account
 {
-    public class LoginModel : PageModel
+    public class LoginModel(TestUserStore users) : PageModel
     {
-        private readonly TestUserStore _users;
-
-        public LoginModel(TestUserStore users)
-        {
-            _users = users;
-        }
+        private readonly TestUserStore _users = users;
 
         [BindProperty]
         public UserCredentials Credentials { get; set; }
@@ -42,9 +35,14 @@ namespace Store.IdentityServer.Pages.Account
                 };
 
                 await HttpContext.SignInAsync(isuser);
+
+                if (ReturnUrl != null)
+                {
+                    return Redirect(ReturnUrl);
+                }
             }
 
-            return Redirect(ReturnUrl);
+            return LocalRedirect("/Index");
         }
     }
 }

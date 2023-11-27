@@ -17,7 +17,8 @@ namespace Store.IdentityServer.Config
                 Password = "password",
                 Claims = new[]
                 {
-                    new Claim(JwtClaimTypes.Name, "admin")
+                    new Claim(JwtClaimTypes.Name, "admin"),
+                    new Claim(JwtClaimTypes.FamilyName, "superadmin")
                 },
             },
         };
@@ -45,6 +46,26 @@ namespace Store.IdentityServer.Config
                 {
                     "https://localhost:5002/signin-oidc"
                 },
+            },
+            new Client()
+            {
+                ClientName = "TEST MVC",
+                ClientId = "test.mvc",
+                AllowedGrantTypes = GrantTypes.Code,
+                ClientSecrets = new[] { new Secret("testmvc".Sha256()) },
+                AllowedScopes = new[]
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                },
+                RedirectUris = new[]
+                {
+                    "https://localhost:5003/signin-oidc"
+                },
+                PostLogoutRedirectUris = new[]
+                {
+                    "https://localhost:5003/signout-callback-oidc"
+                }
             },
         };
     }

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.IdentityServer", "Store.IdentityServer\Store.IdentityServer.csproj", "{CDF5CF50-9D0E-4AEE-8A8D-8928F861E21B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store.IdentityTester", "Store.IdentityTester\Store.IdentityTester.csproj", "{7209B063-AC5F-4DB2-A4E3-EC6C90DCF432}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMVC", "TestMVC\TestMVC.csproj", "{5C57A23B-8416-487D-B851-3BBD7D44A8B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{CDF5CF50-9D0E-4AEE-8A8D-8928F861E21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDF5CF50-9D0E-4AEE-8A8D-8928F861E21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDF5CF50-9D0E-4AEE-8A8D-8928F861E21B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7209B063-AC5F-4DB2-A4E3-EC6C90DCF432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7209B063-AC5F-4DB2-A4E3-EC6C90DCF432}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7209B063-AC5F-4DB2-A4E3-EC6C90DCF432}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7209B063-AC5F-4DB2-A4E3-EC6C90DCF432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C57A23B-8416-487D-B851-3BBD7D44A8B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C57A23B-8416-487D-B851-3BBD7D44A8B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C57A23B-8416-487D-B851-3BBD7D44A8B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C57A23B-8416-487D-B851-3BBD7D44A8B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
