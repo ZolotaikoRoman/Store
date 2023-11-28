@@ -1,0 +1,6 @@
+﻿@page "{itemid}"
+@model Todos.MVC.Pages.Item.ItemModel
+@{
+}
+
+@await Html.PartialAsync("_Todo", @Model.Item)

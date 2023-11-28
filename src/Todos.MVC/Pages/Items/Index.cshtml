@@ -3,7 +3,7 @@
 @{
 }
 
-@foreach (var item in Model.Container.Todos)
+@foreach (var item in Model.Todos)
 {
-    @await Html.PartialAsync("_TodoItem", item);
+    @await Html.PartialAsync("_Todo", item)
 }

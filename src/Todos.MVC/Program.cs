@@ -1,8 +1,12 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Common.Services.Mediatr;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
-using Serilog.Events;
+using Todos.Common.Data;
+using Todos.Common.Data.Domain;
+using Todos.Common.Query.Todos;
+using Todos.Common.Services.Handlers.Todos;
+using Todos.MVC.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,28 +14,15 @@ builder.Logging.ClearProviders();
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllers();
-builder.Services.AddHttpClient();
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
-})
-.AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
-.AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
-{
-    options.Authority = "https://localhost:5000";
-    options.ClientId = "todos.mvc";
-    options.ClientSecret = "todos.mvc";
-    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.GetClaimsFromUserInfoEndpoint = true;
-    options.ResponseType = "code";
-    options.SaveTokens = true;
+builder.Services.AddDbContext<TodoContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("TodoDbConnection")));
 
-    options.Scope.Add("roles");
+builder.Services.ConfigureIdentity();
 
-    options.ClaimActions.MapJsonKey("role", "role");
-});
+builder.Services.AddScoped<IMediator, Mediator>();
+builder.Services.ForScoped<GetTodos, Todo[]>().AddHandler<GetTodosHandler>();
+builder.Services.ForScoped<GetTodo, Todo>().AddHandler<GetTodoHandler>();
 
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));

@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todos.MVC", "Todos.MVC\Todos.MVC.csproj", "{50CA66F0-C185-4617-A0D7-F43B8D48099E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todos.Common", "Todos.Common\Todos.Common.csproj", "{FC63C097-835F-4BBF-B951-8F7606C97490}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todos.Tooling", "Todos.Tooling\Todos.Tooling.csproj", "{FD6C8214-C2D1-47B0-A26F-C1F2AD6C1143}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{50CA66F0-C185-4617-A0D7-F43B8D48099E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50CA66F0-C185-4617-A0D7-F43B8D48099E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50CA66F0-C185-4617-A0D7-F43B8D48099E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC63C097-835F-4BBF-B951-8F7606C97490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC63C097-835F-4BBF-B951-8F7606C97490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC63C097-835F-4BBF-B951-8F7606C97490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC63C097-835F-4BBF-B951-8F7606C97490}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD6C8214-C2D1-47B0-A26F-C1F2AD6C1143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD6C8214-C2D1-47B0-A26F-C1F2AD6C1143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD6C8214-C2D1-47B0-A26F-C1F2AD6C1143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD6C8214-C2D1-47B0-A26F-C1F2AD6C1143}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

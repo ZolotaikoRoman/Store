@@ -1,25 +1,34 @@
-using Microsoft.AspNetCore.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
+using Todos.Common.Data.Domain;
+using Todos.Common.Query.Todos;
 using Todos.MVC.Models;
 
 namespace Todos.MVC.Pages.Items
 {
-    [Authorize]
-    public class IndexModel(IHttpClientFactory factory) : PageModel
+    public class IndexModel(IMediator mediator) : PageModel
     {
-        private readonly IHttpClientFactory _factory = factory;
+        private readonly IMediator _mediator = mediator;
 
-        public TodosContainer Container { get; set; }
+        public IEnumerable<TodoViewModel> Todos { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var httpClient = _factory.CreateClient();
-            var response = await httpClient.GetAsync("https://dummyjson.com/todos").ConfigureAwait(false);
-            var todosJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            var result = await _mediator.Send(new GetTodos()).ConfigureAwait(false);
 
-            Container = JsonConvert.DeserializeObject<TodosContainer>(todosJson);
+            Todos = result.ReduceTo(
+                f => Todos = Array.Empty<TodoViewModel>(),
+                s => s.Select(x => new TodoViewModel
+                {
+                    Todo = new Todo
+                    {
+                        Completed = x.Completed,
+                        Description = x.Description,
+                        Id = x.Id,
+                    },
+                    ShowViewButton = true
+                }));
 
             return Page();
         }

@@ -1,0 +1,19 @@
+﻿@model Todos.MVC.Models.TodoViewModel
+@{
+}
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" id="todo-1">Todo: @Model.Todo.Description</h5>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="completed-1" checked>
+                <label class="form-check-label" for="completed-1">@Model.Todo.Completed</label>
+            </div>
+            @if (Model.ShowViewButton)
+            {
+                <a class="btn btn-dark" asp-page="/details/Index" asp-route-itemid="@Model.Todo.Id">View</a>
+            }
+        </div>
+    </div>
+</div>
