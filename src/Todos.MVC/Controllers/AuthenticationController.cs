@@ -7,9 +7,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace Todos.MVC.Controllers
 {
     [Authorize]
-    [Route("/logout")]
-    public class LogoutController : ControllerBase
+    [Route("/auth")]
+    public class AuthenticationController : ControllerBase
     {
+        [Route("login")]
+        public IActionResult Login()
+        {
+            return Challenge(new AuthenticationProperties
+            {
+                RedirectUri = "/Items",
+            });
+        }
+
+        [Route("logout")]
         public async Task Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).ConfigureAwait(false);

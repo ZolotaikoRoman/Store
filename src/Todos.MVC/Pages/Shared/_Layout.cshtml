@@ -29,7 +29,14 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Items/Index">Items</a>
                         </li>
                     </ul>
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Logout" asp-action="Logout">Logout</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="Logout">Logout</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="Login">Login</a>
+                    }
                 </div>
             </div>
         </nav>

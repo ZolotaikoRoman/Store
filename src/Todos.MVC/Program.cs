@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Serilog;
@@ -26,6 +27,10 @@ builder.Services.AddAuthentication(options =>
     options.GetClaimsFromUserInfoEndpoint = true;
     options.ResponseType = "code";
     options.SaveTokens = true;
+
+    options.Scope.Add("roles");
+
+    options.ClaimActions.MapJsonKey("role", "role");
 });
 
 builder.Host.UseSerilog((context, configuration) =>

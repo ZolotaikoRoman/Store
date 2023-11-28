@@ -19,6 +19,19 @@ namespace IdentityServer.Config
                 {
                     new Claim(JwtClaimTypes.FamilyName, "superadmin"),
                     new Claim(JwtClaimTypes.GivenName, "megaadmin"),
+                    new Claim(JwtClaimTypes.Role, "Admin"),
+                },
+            },
+            new TestUser
+            {
+                SubjectId = "1111111",
+                Username = "user",
+                Password = "user",
+                Claims = new[]
+                {
+                    new Claim(JwtClaimTypes.FamilyName, "justuser"),
+                    new Claim(JwtClaimTypes.GivenName, "simpleuser"),
+                    new Claim(JwtClaimTypes.Role, "User"),
                 },
             },
         };
@@ -27,6 +40,7 @@ namespace IdentityServer.Config
         {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
+            new IdentityResource("roles", "Your Roles", new[] {"role"}),
         };
 
         public static List<Client> Clients => new()
@@ -49,6 +63,7 @@ namespace IdentityServer.Config
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
+                    "roles",
                 },
             }
         };
